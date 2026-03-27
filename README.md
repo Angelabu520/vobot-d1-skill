@@ -48,6 +48,12 @@ ln -s "/path/to/vobot-d1-skill" "$HOME/.claude/skills/vobot-d1-python-app-builde
 
 Then reload Claude Code plugins or restart Claude Code.
 
+## Official references
+
+- VOBOT developer getting started: https://dock.myvobot.com/developer/getting_started/
+- Important resource path configuration: https://dock.myvobot.com/developer/getting_started/#important-resource-file-path-configuration
+- Thonny download: https://thonny.org/
+
 ## Trigger examples
 
 After installation, ask Claude things like:
