@@ -59,19 +59,19 @@ Then reload Claude Code plugins or restart Claude Code.
 After installation, ask Claude things like:
 
 ```text
-帮我开发一个运行在 VOBOT D1 上的 Python 小程序
+Make a hello world app for VOBOT D1
 ```
 
 ```text
-做一个 VOBOT D1 的 hello world app
+Make a hello world app for VOBOT D1
 ```
 
 ```text
-帮我写一个能在 VOBOT D1 上显示二维码的应用
+Please help me write an application that can display QR codes on a VOBOT D1.
 ```
 
 ```text
-帮我做一个 VOBOT D1 俄罗斯方块游戏
+Please make me a VOBOT D1 Tetris game.
 ```
 
 ## Example output style
