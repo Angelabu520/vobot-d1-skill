@@ -1,28 +1,28 @@
 # VOBOT D1 Getting Started Reference
 
-本参考整理自 VOBOT D1 developer getting started 页面，用于在生成应用、部署应用、排查问题时快速查阅。
+This reference condenses the VOBOT D1 developer getting started page so it can be used quickly while generating apps, deploying them, and troubleshooting issues.
 
-## 1. 开发前提
+## 1. Prerequisites
 
-需要：
-- Mini Dock / VOBOT D1 设备
-- Windows / macOS / Linux 电脑
-- USB-C 数据线
+You need:
+- a Mini Dock / VOBOT D1 device
+- a Windows, macOS, or Linux computer
+- a USB-C data cable
 - Thonny
 
-## 2. 设备准备
+## 2. Device Setup
 
-1. 在设备设置中开启 **Developer Mode**。
-2. 开启后，需要给设备断电并重新连接电源，确保开发模式生效。
-3. 用 USB 数据线把设备连接到电脑。
-4. 在 Thonny 里选择 ESP32 连接。
-5. 打开 Files 视图管理板端文件。
+1. Enable **Developer Mode** in the device settings.
+2. After enabling it, power-cycle the device so developer mode takes effect.
+3. Connect the device to the computer with a USB cable.
+4. In Thonny, select the ESP32 connection.
+5. Open the Files view to manage files on the device.
 
-## 3. 应用目录规则
+## 3. App Directory Rules
 
-每个 app 使用独立文件夹。
+Each app should use its own folder.
 
-推荐结构：
+Recommended structure:
 
 ```text
 my-app/
@@ -32,29 +32,29 @@ my-app/
     └── other-assets...
 ```
 
-资源统一放进 `resources/`。
+Place all bundled assets inside `resources/`.
 
-## 4. 最重要的路径约束
+## 4. Most Important Path Constraint
 
-平台会把应用目录重命名为 `NAME` 变量对应的名字。
+The platform renames the app directory to match the value of `NAME`.
 
-因此资源路径必须使用这种设备路径：
+Because of that, asset paths must use the device path format:
 
 ```python
 f"A:apps/{NAME}/resources/icon.png"
 ```
 
-也可以抽象成：
+You can generalize it as:
 
 ```text
 A:apps/{APP NAME}/resources/...
 ```
 
-不要依赖本地生成时的目录名，否则上传到设备后资源引用可能失效。
+Do not rely on the local temporary folder name used during generation, or asset references may break after upload.
 
-## 5. 页面展示的示例代码要点
+## 5. Key Code Pattern From The Reference
 
-页面中可见的关键代码片段包括：
+The page shows core code like this:
 
 ```python
 import lvgl as lv
@@ -85,51 +85,51 @@ async def on_start():
     lv.scr_load(scr)
 ```
 
-说明：
-- `on_start()`：初始化页面
-- `on_running_foreground()`：前台运行时周期执行，页面说明里提到大约每 200ms 触发一次
-- `on_stop()`：停止时清理资源
+Notes:
+- `on_start()`: initialize the screen
+- `on_running_foreground()`: run periodically in the foreground; the page notes it is triggered about every 200 ms
+- `on_stop()`: clean up resources when the app stops
 
-## 6. 部署方式
+## 6. Deployment Method
 
-没有单独的打包步骤。
+There is no separate packaging step.
 
-安装 app 的方式就是：
-- 在 Thonny 的板端文件视图中
-- 把整个 app 文件夹复制到设备的 `apps` 目录
+To install an app:
+- use the board-side Files view in Thonny
+- copy the entire app folder into the device `apps` directory
 
-## 7. 卸载方式
+## 7. Uninstall Method
 
-卸载时：
-- 只删除目标 app 的文件夹
-- 不要删除 `apps` 目录本身
+When uninstalling:
+- delete only the target app folder
+- do not delete the `apps` directory itself
 
-## 8. 上传后重启
+## 8. Restart After Upload
 
-上传或删除 app 后，按：
+After uploading or deleting an app, press:
 
 ```text
 Ctrl+D
 ```
 
-用于重启/继续执行设备程序。
+This restarts or resumes program execution on the device.
 
-## 9. 调试
+## 9. Debugging
 
-连接开发模式后，可以在 Thonny 中查看日志。
+After connecting in developer mode, you can inspect logs in Thonny.
 
-页面说明中提到：
-- 设备侧错误会打印出来
-- 可以借助日志定位问题
-- Thonny 还可以查看 flash 使用情况和剩余空间
+The page notes that:
+- device-side errors are printed to the log
+- logs can be used to locate problems
+- Thonny can also show flash usage and remaining space
 
-## 10. 生成代码时的检查清单
+## 10. Checklist For Generated Code
 
-每次产出 VOBOT D1 app 前后，检查：
-- 是否定义了 `NAME`
-- 是否使用了 `__init__.py`
-- 是否把资源放进 `resources/`
-- 是否所有资源路径都基于 `A:apps/{NAME}/resources/...`
-- 是否给出了上传到 `apps` 的说明
-- 是否提醒了 `Ctrl+D`
-- 是否把调试入口指向 Thonny 日志
+Before and after generating a VOBOT D1 app, check:
+- whether `NAME` is defined
+- whether the entry file is `__init__.py`
+- whether assets are placed under `resources/`
+- whether all asset paths are based on `A:apps/{NAME}/resources/...`
+- whether upload instructions mention the `apps` directory
+- whether the user is reminded to press `Ctrl+D`
+- whether debugging points the user to Thonny logs
